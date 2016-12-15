@@ -1,7 +1,7 @@
 @echo off
 rem =========================================================================
 rem Script for generating export files from MIS PolyBase database.
-rem 
+rem
 rem Developed for medical portal  Docdoc.ru
 rem =========================================================================
 
@@ -11,6 +11,7 @@ SetLocal EnableDelayedExpansion EnableExtensions
 echo Loading...
 call docdoc_export_config.bat
 rem creating variable for newline sequence
+set "tmpsql=.\tmp\tmp.sql"
 set EOL=^
 
 
@@ -19,6 +20,9 @@ echo Cleaning from old export files
 for %%a in (%exportfiles%) do (
     if exist %exportpath%%%a.csv del /Q /F %exportpath%%%a.csv
 )
+
+rem making export catalog if not exist
+if not exist %exportpath% mkdir %exportpath%
 
 
 rem # 3. Make fresh data export from DB
@@ -40,13 +44,13 @@ rem buiding final sql with spolling commands
     set "sqlcommand=!sqlstart!!EOL!!sqlcommand!spool off;!eol!quit;"
 
 rem creating temporary file for PL SQL script
-    echo !sqlcommand! > tmp/tmp.sql
+    echo !sqlcommand! > %tmpsql%
 
-    "%sql_cmd_path%\sqlplus" -S %con_str% @tmp/tmp.sql
+    "%sql_cmd_path%\sqlplus" -S %con_str% @%tmpsql%
 )
 
 rem removing temporary file
-if exist tmp/tmp.sql del /Q /F tmp/tmp.sql
+if exist %tmpsql% del %tmpsql%
 
 rem # 4. This batch is done.
 rem To upload exported files run docdoc_upload.bat
