@@ -1,6 +1,6 @@
 @echo off
 rem =========================================================================
-rem Script for do the export data from MIS PolyBase database to Docdoc.
+rem Script for do the export data from MIS PoliBase database to Docdoc.
 rem 
 rem Developed for medical portal  Docdoc.ru
 rem =========================================================================

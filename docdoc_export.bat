@@ -1,6 +1,6 @@
 @echo off
 rem =========================================================================
-rem Script for generating export files from MIS PolyBase database.
+rem Script for generating export files from MIS PoliBase database.
 rem
 rem Developed for medical portal  Docdoc.ru
 rem =========================================================================
