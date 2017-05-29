@@ -43,6 +43,8 @@ if "%uploadmode%"=="webdav" (
 
 echo option batch on>> %ftpbatchfile%
 echo option confirm off>> %ftpbatchfile%
+echo option reconnecttime 120>> %ftpbatchfile%
+
 
 rem Make fresh data export from DB
 for %%a in (%exportfiles%) do (
